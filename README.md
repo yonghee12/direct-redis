@@ -2,10 +2,18 @@
 * Serialize any python datatypes and executes redis commands using redis-py
 * When loading, it auutomatically converts serialized data into original data types 
 
-# Install
+## Getting Started
+
+### Install via pypi
 `pip install direct-redis`
 
-# Supporting Data Types
+### Instantiate 
+```
+from direct_redis import DirectRedis
+r = DirectRedis(host='localhost', port=6379)
+```
+
+## Supporting Data Types
 * Built-in
     * string
     * number(int, float)
@@ -17,7 +25,7 @@
     * pandas
     * numpy
   
-# Supporting Redis Commands
+## Supporting Redis Commands
 * SET
 * HSET
 * HMSET
@@ -26,15 +34,8 @@
 * HMGET
 * HGETALL
  
-# Usage
 
-## Instantiate 
-```
-from direct_redis import DirectRedis
-r = DirectRedis(host='localhost', port=6379)
-```
-
-## Example
+## Examples
 ### String
 * Originally redis stores string into bytes.
 ```

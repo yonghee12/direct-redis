@@ -9,7 +9,7 @@ setuptools.setup(
     description="Serialize any python datatypes and does redis actions using redis-py",
     long_description=open('README.md', encoding='utf-8').read(),
     long_description_content_type='text/markdown',
-    url="https://github.com/yonghee12/progress_timer",
+    url="https://github.com/yonghee12/direct-redis",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
