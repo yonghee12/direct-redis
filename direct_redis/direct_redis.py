@@ -5,7 +5,7 @@ from direct_redis.functions import *
 class DirectRedis(Redis):
     def keys(self, pattern: str = "*"):
         encoded = super().keys(pattern)
-        return [convert_get_type(key) for key in encoded]
+        return [convert_get_type(key, force_decode=False) for key in encoded]
 
     def set(self, key, value):
         super().set(key, convert_set_type(value))
