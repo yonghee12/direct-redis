@@ -17,4 +17,5 @@ setuptools.setup(
         "Operating System :: OS Independent"
     ],
     python_requires='>=3.4',
+    install_requires=['redis==3.4.1'],
 )

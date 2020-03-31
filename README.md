@@ -1,4 +1,4 @@
-# direct-redis
+# Direct-Redis
 * Serialize any python datatypes and executes redis commands using redis-py
 * When loading, it auutomatically converts serialized data into original data types 
 
