@@ -26,6 +26,7 @@ r = DirectRedis(host='localhost', port=6379)
     * numpy
   
 ## Supporting Redis Commands
+* KEYS
 * SET
 * HSET
 * HMSET
