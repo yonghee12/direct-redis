@@ -3,9 +3,6 @@ from direct_redis.functions import *
 
 
 class DirectRedis(Redis):
-    def __init__(self):
-        super().__init__()
-
     def set(self, key, value):
         super().set(key, convert_set_type(value))
 
