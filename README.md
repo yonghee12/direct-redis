@@ -1,4 +1,4 @@
-# Progress Timer
+# direct-redis
 * Serialize any python datatypes and executes redis commands using redis-py
 * When loading, it auutomatically converts serialized data into original data types 
 
