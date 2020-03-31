@@ -3,6 +3,10 @@ from direct_redis.functions import *
 
 
 class DirectRedis(Redis):
+    def keys(self, pattern: str = "*"):
+        encoded = super().keys(pattern)
+        return [convert_get_type(key) for key in encoded]
+
     def set(self, key, value):
         super().set(key, convert_set_type(value))
 
@@ -26,7 +30,7 @@ class DirectRedis(Redis):
 
     def hmget(self, name, *keys, force_decode=False):
         encoded = super().hmget(name, *keys)
-        return [convert_get_type(elem, force_decode) for elem in encoded]
+        return [convert_get_type(value, force_decode) for value in encoded]
 
     def hgetall(self, name, force_decode=False):
         encoded = super().hgetall(name)
