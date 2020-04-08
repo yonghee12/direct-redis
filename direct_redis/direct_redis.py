@@ -8,17 +8,17 @@ class DirectRedis(Redis):
         return [convert_get_type(key, force_decode=False) for key in encoded]
 
     def set(self, key, value):
-        super().set(key, convert_set_type(value))
+        return super().set(key, convert_set_type(value))
 
     def hset(self, name, key, value):
-        super().hset(name, key, convert_set_type(value))
+        return super().hset(name, key, convert_set_type(value))
 
     def hmset(self, name, mapping):
         if not isinstance(mapping, dict):
             raise Exception("mapping must be a python dictionary")
         else:
             mapping = convert_set_mapping_dic(mapping)
-            super().hmset(name, mapping)
+            return super().hmset(name, mapping)
 
     def get(self, key, force_decode=False):
         encoded = super().get(key)
@@ -39,3 +39,11 @@ class DirectRedis(Redis):
             new_k = k.decode('utf-8')
             dic[new_k] = convert_get_type(v, force_decode)
         return dic
+
+    def sadd(self, name, *values):
+        encoded = [convert_set_type(value) for value in values]
+        return super().sadd(name, *encoded)
+
+    def smembers(self, name, force_decode=False):
+        encoded = super().smembers(name)
+        return [convert_get_type(value, force_decode) for value in encoded]
