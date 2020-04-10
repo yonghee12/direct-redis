@@ -45,5 +45,22 @@ class DirectRedis(Redis):
         return super().sadd(name, *encoded)
 
     def smembers(self, name, force_decode=False):
+        # TODO: return type set과 list 중에 고민
         encoded = super().smembers(name)
+        return [convert_get_type(value, force_decode) for value in encoded]
+
+    def lpush(self, name, *values):
+        encoded = [convert_set_type(value) for value in values]
+        return super().lpush(name, *encoded)
+
+    def lrange(self, name, start=0, end=-1, force_decode=False):
+        """
+        If start and end are not defined, returns everything.
+        :param str name: key name
+        :param int start: starting index. default 0: first index
+        :param int end: ending index. default -1: ending index
+        :param bool force_decode: forcing deserialize rather than decoding utf-8
+        :return: list
+        """
+        encoded = super().lrange(name, start, end)
         return [convert_get_type(value, force_decode) for value in encoded]
