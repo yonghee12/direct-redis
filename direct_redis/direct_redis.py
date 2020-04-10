@@ -7,7 +7,7 @@ class DirectRedis(Redis):
         encoded = super().keys(pattern)
         return [convert_get_type(key, force_decode=False) for key in encoded]
 
-    def set(self, key, value):
+    def set(self, key, value, ex=None, px=None, nx=False, xx=False):
         return super().set(key, convert_set_type(value))
 
     def hset(self, name, key, value):
