@@ -7,6 +7,10 @@ class DirectRedis(Redis):
         encoded = super().keys(pattern)
         return [convert_get_type(key, force_decode=False) for key in encoded]
 
+    def type(self, name):
+        encoded = super().type(name)
+        return convert_get_type(encoded, force_decode=False)
+
     def set(self, key, value, ex=None, px=None, nx=False, xx=False):
         return super().set(key, convert_set_type(value))
 
@@ -52,6 +56,10 @@ class DirectRedis(Redis):
     def lpush(self, name, *values):
         encoded = [convert_set_type(value) for value in values]
         return super().lpush(name, *encoded)
+
+    def rpush(self, name, *values):
+        encoded = [convert_set_type(value) for value in values]
+        return super().rpush(name, *encoded)
 
     def lrange(self, name, start=0, end=-1, force_decode=False):
         """
