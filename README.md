@@ -27,13 +27,22 @@ r = DirectRedis(host='localhost', port=6379)
   
 ## Supporting Redis Commands
 * KEYS
+* TYPE
 * SET
-* HSET
-* HMSET
 * GET
-* HGET
-* HMGET
-* HGETALL
+* Hash Functions
+    * HSET
+    * HMSET
+    * HGET
+    * HMGET
+    * HGETALL
+* Set Functions
+    * SADD
+    * SMEMBERS
+* List Functions
+    * LPUSH
+    * RPUSH
+    * LRNAGE
  
 
 ## Examples
