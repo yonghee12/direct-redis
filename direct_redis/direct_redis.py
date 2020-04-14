@@ -7,6 +7,10 @@ class DirectRedis(Redis):
         encoded = super().keys(pattern)
         return [convert_get_type(key, force_decode=False) for key in encoded]
 
+    def hkeys(self, name):
+        encoded = super().hkeys(name)
+        return [convert_get_type(key, force_decode=False) for key in encoded]
+
     def type(self, name):
         encoded = super().type(name)
         return convert_get_type(encoded, force_decode=False)
