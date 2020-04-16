@@ -26,6 +26,7 @@ r = DirectRedis(host='localhost', port=6379)
     * numpy
   
 ## Supporting Redis Commands
+### Direct-Redis Supports
 * Basic Functions
     * KEYS
     * TYPE
@@ -38,6 +39,7 @@ r = DirectRedis(host='localhost', port=6379)
     * HGET
     * HMGET
     * HGETALL
+    * HVALS
 * Set Functions
     * SADD
     * SMEMBERS

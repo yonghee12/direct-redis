@@ -40,6 +40,10 @@ class DirectRedis(Redis):
         encoded = super().hmget(name, *keys)
         return [convert_get_type(value, force_decode) for value in encoded]
 
+    def hvals(self, name, force_decode=False):
+        encoded = super().hvals(name)
+        return [convert_get_type(value, force_decode) for value in encoded]
+
     def hgetall(self, name, force_decode=False):
         encoded = super().hgetall(name)
         dic = dict()
