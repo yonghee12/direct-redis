@@ -7,16 +7,31 @@ class DirectRedis(Redis):
         encoded = super().keys(pattern)
         return [convert_get_type(key, force_decode=False) for key in encoded]
 
-    def hkeys(self, name):
-        encoded = super().hkeys(name)
-        return [convert_get_type(key, force_decode=False) for key in encoded]
-
     def type(self, name):
         encoded = super().type(name)
         return convert_get_type(encoded, force_decode=False)
 
     def set(self, key, value, ex=None, px=None, nx=False, xx=False):
         return super().set(key, convert_set_type(value))
+
+    def get(self, key, force_decode=False):
+        encoded = super().get(key)
+        return convert_get_type(encoded, force_decode)
+
+    def mset(self, mapping):
+        if not isinstance(mapping, dict):
+            raise Exception("mapping must be a python dictionary")
+        else:
+            mapping = convert_set_mapping_dic(mapping)
+            return super().mset(mapping)
+
+    def mget(self, *args, force_decode=False):
+        encoded = super().mget(args)
+        return [convert_get_type(value, force_decode) for value in encoded]
+
+    def hkeys(self, name):
+        encoded = super().hkeys(name)
+        return [convert_get_type(key, force_decode=False) for key in encoded]
 
     def hset(self, name, key, value):
         return super().hset(name, key, convert_set_type(value))
@@ -27,10 +42,6 @@ class DirectRedis(Redis):
         else:
             mapping = convert_set_mapping_dic(mapping)
             return super().hmset(name, mapping)
-
-    def get(self, key, force_decode=False):
-        encoded = super().get(key)
-        return convert_get_type(encoded, force_decode)
 
     def hget(self, name, key, force_decode=False):
         encoded = super().hget(name, key)
