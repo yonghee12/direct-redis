@@ -67,6 +67,10 @@ class DirectRedis(Redis):
         encoded = [convert_set_type(value) for value in values]
         return super().sadd(name, *encoded)
 
+    def srem(self, name, *values):
+        encoded = [convert_set_type(value) for value in values]
+        return super().srem(name, *encoded)
+
     def smembers(self, name, force_decode=False):
         # TODO: return type set과 list 중에 고민
         encoded = super().smembers(name)
