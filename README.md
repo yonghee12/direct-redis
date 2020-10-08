@@ -44,6 +44,9 @@ r = DirectRedis(host='localhost', port=6379)
     * SADD
     * SREM
     * SMEMBERS
+    * SPOP
+    * SDIFF
+    * SCARD (Default)
 * List Functions
     * LPUSH
     * RPUSH
