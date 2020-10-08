@@ -91,6 +91,14 @@ class DirectRedis(Redis):
         encoded = [convert_set_type(value) for value in values]
         return super().rpush(name, *encoded)
 
+    def lpop(self, name, force_decode=False):
+        encoded = super().lpop(name)
+        return convert_get_type(encoded, force_decode)
+
+    def rpop(self, name, force_decode=False):
+        encoded = super().rpop(name)
+        return convert_get_type(encoded, force_decode)
+
     def lrange(self, name, start=0, end=-1, force_decode=False):
         """
         If start and end are not defined, returns everything.

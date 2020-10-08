@@ -51,6 +51,8 @@ r = DirectRedis(host='localhost', port=6379)
     * LPUSH
     * RPUSH
     * LRNAGE
+    * LPOP
+    * RPOP
  
 
 ## Examples
