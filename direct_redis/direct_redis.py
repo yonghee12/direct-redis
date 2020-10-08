@@ -72,9 +72,16 @@ class DirectRedis(Redis):
         return super().srem(name, *encoded)
 
     def smembers(self, name, force_decode=False):
-        # TODO: return type set과 list 중에 고민
         encoded = super().smembers(name)
-        return [convert_get_type(value, force_decode) for value in encoded]
+        return {convert_get_type(value, force_decode) for value in encoded}
+
+    def spop(self, name, force_decode=False):
+        encoded = super().spop(name)
+        return convert_get_type(encoded, force_decode)
+
+    def sdiff(self, primary_set, *comparing_sets):
+        encoded = super().sdiff(primary_set, *comparing_sets)
+        return {convert_get_type(value, force_decode=False) for value in encoded}
 
     def lpush(self, name, *values):
         encoded = [convert_set_type(value) for value in values]
