@@ -5,18 +5,18 @@ from direct_redis.functions import *
 class DirectRedis(Redis):
     def keys(self, pattern: str = "*"):
         encoded = super().keys(pattern)
-        return [convert_get_type(key, force_decode=False) for key in encoded]
+        return [convert_get_type(key, pickle_first=False) for key in encoded]
 
     def type(self, name):
         encoded = super().type(name)
-        return convert_get_type(encoded, force_decode=False)
+        return convert_get_type(encoded, pickle_first=False)
 
     def set(self, key, value, ex=None, px=None, nx=False, xx=False):
         return super().set(key, convert_set_type(value))
 
-    def get(self, key, force_decode=False):
+    def get(self, key, pickle_first=False):
         encoded = super().get(key)
-        return convert_get_type(encoded, force_decode)
+        return convert_get_type(encoded, pickle_first)
 
     def mset(self, mapping):
         if not isinstance(mapping, dict):
@@ -25,13 +25,13 @@ class DirectRedis(Redis):
             mapping = convert_set_mapping_dic(mapping)
             return super().mset(mapping)
 
-    def mget(self, *args, force_decode=False):
+    def mget(self, *args, pickle_first=False):
         encoded = super().mget(args)
-        return [convert_get_type(value, force_decode) for value in encoded]
+        return [convert_get_type(value, pickle_first) for value in encoded]
 
     def hkeys(self, name):
         encoded = super().hkeys(name)
-        return [convert_get_type(key, force_decode=False) for key in encoded]
+        return [convert_get_type(key, pickle_first=False) for key in encoded]
 
     def hset(self, name, key, value):
         return super().hset(name, key, convert_set_type(value))
@@ -43,24 +43,24 @@ class DirectRedis(Redis):
             mapping = convert_set_mapping_dic(mapping)
             return super().hmset(name, mapping)
 
-    def hget(self, name, key, force_decode=False):
+    def hget(self, name, key, pickle_first=False):
         encoded = super().hget(name, key)
-        return convert_get_type(encoded, force_decode)
+        return convert_get_type(encoded, pickle_first)
 
-    def hmget(self, name, *keys, force_decode=False):
+    def hmget(self, name, *keys, pickle_first=False):
         encoded = super().hmget(name, *keys)
-        return [convert_get_type(value, force_decode) for value in encoded]
+        return [convert_get_type(value, pickle_first) for value in encoded]
 
-    def hvals(self, name, force_decode=False):
+    def hvals(self, name, pickle_first=False):
         encoded = super().hvals(name)
-        return [convert_get_type(value, force_decode) for value in encoded]
+        return [convert_get_type(value, pickle_first) for value in encoded]
 
-    def hgetall(self, name, force_decode=False):
+    def hgetall(self, name, pickle_first=False):
         encoded = super().hgetall(name)
         dic = dict()
         for k, v in encoded.items():
             new_k = k.decode('utf-8')
-            dic[new_k] = convert_get_type(v, force_decode)
+            dic[new_k] = convert_get_type(v, pickle_first)
         return dic
 
     def sadd(self, name, *values):
@@ -71,17 +71,17 @@ class DirectRedis(Redis):
         encoded = [convert_set_type(value) for value in values]
         return super().srem(name, *encoded)
 
-    def smembers(self, name, force_decode=False):
+    def smembers(self, name, pickle_first=False):
         encoded = super().smembers(name)
-        return {convert_get_type(value, force_decode) for value in encoded}
+        return {convert_get_type(value, pickle_first) for value in encoded}
 
-    def spop(self, name, force_decode=False):
+    def spop(self, name, pickle_first=False):
         encoded = super().spop(name)
-        return convert_get_type(encoded, force_decode)
+        return convert_get_type(encoded, pickle_first)
 
     def sdiff(self, primary_set, *comparing_sets):
         encoded = super().sdiff(primary_set, *comparing_sets)
-        return {convert_get_type(value, force_decode=False) for value in encoded}
+        return {convert_get_type(value, pickle_first=False) for value in encoded}
 
     def lpush(self, name, *values):
         encoded = [convert_set_type(value) for value in values]
@@ -91,22 +91,26 @@ class DirectRedis(Redis):
         encoded = [convert_set_type(value) for value in values]
         return super().rpush(name, *encoded)
 
-    def lpop(self, name, force_decode=False):
+    def lpop(self, name, pickle_first=False):
         encoded = super().lpop(name)
-        return convert_get_type(encoded, force_decode)
+        return convert_get_type(encoded, pickle_first)
 
-    def rpop(self, name, force_decode=False):
+    def rpop(self, name, pickle_first=False):
         encoded = super().rpop(name)
-        return convert_get_type(encoded, force_decode)
+        return convert_get_type(encoded, pickle_first)
 
-    def lrange(self, name, start=0, end=-1, force_decode=False):
+    def lindex(self, name, index, pickle_first=False):
+        encoded = super().lindex(name, index)
+        return convert_get_type(encoded, pickle_first)
+
+    def lrange(self, name, start=0, end=-1, pickle_first=False):
         """
         If start and end are not defined, returns everything.
         :param str name: key name
         :param int start: starting index. default 0: first index
         :param int end: ending index. default -1: ending index
-        :param bool force_decode: forcing deserialize rather than decoding utf-8
+        :param bool pickle_first: forcing deserialize rather than decoding utf-8
         :return: list
         """
         encoded = super().lrange(name, start, end)
-        return [convert_get_type(value, force_decode) for value in encoded]
+        return [convert_get_type(value, pickle_first) for value in encoded]
