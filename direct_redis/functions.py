@@ -27,11 +27,11 @@ def convert_set_mapping_dic(dic):
     return new_dic
 
 
-def convert_get_type(encoded, force_decode):
+def convert_get_type(encoded, pickle_first):
     if encoded is None:
         return None
     else:
-        if force_decode:
+        if pickle_first:
             try:
                 return pickle.loads(encoded)
             except Exception as e:
