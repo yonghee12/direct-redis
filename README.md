@@ -53,6 +53,7 @@ r = DirectRedis(host='localhost', port=6379)
     * LRNAGE
     * LPOP
     * RPOP
+    * LINDEX
  
 
 ## Examples
