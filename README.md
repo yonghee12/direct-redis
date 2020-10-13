@@ -47,6 +47,7 @@ r = DirectRedis(host='localhost', port=6379)
     * SPOP
     * SDIFF
     * SCARD (Default)
+    * SRANDMEMBER
 * List Functions
     * LPUSH
     * RPUSH
