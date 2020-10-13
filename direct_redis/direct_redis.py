@@ -79,6 +79,13 @@ class DirectRedis(Redis):
         encoded = super().spop(name)
         return convert_get_type(encoded, pickle_first)
 
+    def srandmember(self, name, count=None, pickle_first=False):
+        encoded = super().srandmember(name, number=count)
+        if isinstance(encoded, list):
+            return [convert_get_type(value, pickle_first) for value in encoded]
+        else:
+            return convert_get_type(encoded, pickle_first)
+
     def sdiff(self, primary_set, *comparing_sets):
         encoded = super().sdiff(primary_set, *comparing_sets)
         return {convert_get_type(value, pickle_first=False) for value in encoded}
