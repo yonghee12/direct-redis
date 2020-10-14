@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="direct_redis",
-    version="0.2.8",
+    version="0.2.9",
     license='MIT',
     author="Yonghee Cheon",
     author_email="yonghee.cheon@gmail.com",
