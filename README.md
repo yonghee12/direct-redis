@@ -51,7 +51,9 @@ r = DirectRedis(host='localhost', port=6379)
 * List Functions
     * LPUSH
     * RPUSH
-    * LRNAGE
+    * LPUSHX
+    * RPUSHX
+    * LRANGE
     * LPOP
     * RPOP
     * LINDEX
