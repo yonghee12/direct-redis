@@ -94,6 +94,12 @@ class DirectRedis(Redis):
         encoded = [convert_set_type(value) for value in values]
         return super().lpush(name, *encoded)
 
+    def lpushx(self, name, value):
+        return super().lpushx(name, convert_set_type(value))
+
+    def rpushx(self, name, value):
+        return super().rpushx(name, convert_set_type(value))
+
     def rpush(self, name, *values):
         encoded = [convert_set_type(value) for value in values]
         return super().rpush(name, *encoded)
