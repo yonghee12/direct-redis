@@ -7,6 +7,10 @@ class DirectRedis(Redis):
         encoded = super().keys(pattern)
         return [convert_get_type(key, pickle_first=False) for key in encoded]
 
+    def randomkey(self, pickle_first=False):
+        encoded = super().randomkey()
+        return convert_get_type(encoded, pickle_first)
+
     def type(self, name):
         encoded = super().type(name)
         return convert_get_type(encoded, pickle_first=False)
