@@ -29,6 +29,7 @@ r = DirectRedis(host='localhost', port=6379)
 ### Direct-Redis Supports
 * Basic Functions
     * KEYS
+    * RANDOMKEY
     * TYPE
     * SET
     * GET
