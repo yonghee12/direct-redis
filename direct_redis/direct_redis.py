@@ -75,6 +75,10 @@ class DirectRedis(Redis):
         encoded = [convert_set_type(value) for value in values]
         return super().srem(name, *encoded)
 
+    def sismember(self, name, value):
+        encoded = convert_set_type(value)
+        return super().sismember(name, encoded)
+
     def smembers(self, name, pickle_first=False):
         encoded = super().smembers(name)
         return {convert_get_type(value, pickle_first) for value in encoded}
