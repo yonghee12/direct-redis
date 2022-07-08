@@ -8,7 +8,7 @@
 `pip install direct-redis`
 
 ### Instantiate 
-```
+```python
 from direct_redis import DirectRedis
 r = DirectRedis(host='localhost', port=6379)
 ```
