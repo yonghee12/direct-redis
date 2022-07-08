@@ -63,7 +63,7 @@ r = DirectRedis(host='localhost', port=6379)
 ## Examples
 ### String
 * Originally redis stores string into bytes.
-```
+```python
 >>> s = "This is a String. \n스트링입니다."
 >>> print(s)
 This is a String.
@@ -79,7 +79,7 @@ This is a String.
 ```
 
 ### Numbers
-```
+```python
 >>> mapping = {
 ...     'a': 29,
 ...     'b': 0.5335113,
@@ -96,7 +96,7 @@ True
 ```
 
 ### Nested Dictionaries and Lists
-```
+```python
 >>> l = [1,2,3]
 >>> d = {'a': 1, 'b': 2, 'c': 3}   
 
@@ -113,7 +113,7 @@ True
 ```
 
 ### Pandas DataFrame
-```
+```python
 >>> df =  pd.DataFrame([[1,2,3,'235', '@$$#@'], 
                        ['a', 'b', 'c', 'd', 'e']])
 >>> print(df)
@@ -134,7 +134,7 @@ True
 
 
 ### Numpy Array
-```
+```python
 >>> arr = np.random.rand(10).reshape(5, 2)
 >>> print(arr)
 [[0.25873887 0.00937433]
